@@ -1,0 +1,14 @@
+stages:
+  - test
+
+test_pipeline:
+  stage: test
+  image: python:3.13
+  before_script:
+    - python -m pip install --upgrade pip
+    - python -m pip install streamlit pandas scikit-learn
+  script:
+    - python -m py_compile house.py
+    - python -c "import streamlit, pandas, sklearn; print('dependencies ok')"
+  only:
+    - main
